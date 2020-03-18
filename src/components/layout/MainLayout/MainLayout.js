@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 
 import { Header } from '../Header/Header';
 
-import Typography from '@material-ui/core/Typography';
-import Container from '@material-ui/core/Container';
+import Container from 'react-bootstrap/Container';
 
 import clsx from 'clsx';
 
@@ -15,10 +14,8 @@ import styles from './MainLayout.module.scss';
 
 const Component = ({ className, children }) => (
   <div className={clsx(className, styles.root)}>
-    <Container maxWidth="lg">
-      <Typography component="div" />
-      <h2>MainLayout</h2>
-      <Header />
+    <Header />
+    <Container>
       {children}
     </Container>
   </div>
