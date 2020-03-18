@@ -11,7 +11,7 @@ import clsx from 'clsx';
 
 import styles from './Header.module.scss';
 
-const Component = ({ className, children }) => (
+const Component = ({ className }) => (
   <div className={clsx(className, styles.root)}>
     <Navbar bg="dark" variant="dark">
       <Navbar.Brand href="#home">Bulletin Board</Navbar.Brand>
@@ -21,13 +21,10 @@ const Component = ({ className, children }) => (
         <Nav.Link href="/">Logout</Nav.Link>
       </Nav>
     </Navbar>
-
-    {children}
   </div >
 );
 
 Component.propTypes = {
-  children: PropTypes.node,
   className: PropTypes.string,
 };
 
