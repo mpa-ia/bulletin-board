@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Button from '@material-ui/core/Button';
+import Navbar from 'react-bootstrap/Navbar';
+import Nav from 'react-bootstrap/Nav';
 
 import clsx from 'clsx';
 
@@ -12,16 +13,14 @@ import styles from './Header.module.scss';
 
 const Component = ({ className, children }) => (
   <div className={clsx(className, styles.root)}>
-    <h2>Header</h2>
-    <Button href="https://google.com" variant="contained" color="primary" size="large">
-      Login with Google
-    </Button>
-    <Button href="/" variant="contained" color="primary" size="large">
-      My Ads
-    </Button>
-    <Button href="/" variant="contained" color="primary" size="large">
-      Logout
-    </Button>
+    <Navbar bg="dark" variant="dark">
+      <Navbar.Brand href="#home">Bulletin Board</Navbar.Brand>
+      <Nav className="mr-auto">
+        <Nav.Link href="https://google.com">Login with Google</Nav.Link>
+        <Nav.Link href="/">My ads</Nav.Link>
+        <Nav.Link href="/">Logout</Nav.Link>
+      </Nav>
+    </Navbar>
 
     {children}
   </div >
