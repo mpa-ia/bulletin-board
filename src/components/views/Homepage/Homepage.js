@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import CardGroup from 'react-bootstrap/CardGroup';
 import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
 
 import clsx from 'clsx';
 
@@ -26,7 +27,7 @@ const myads = [
     image: 'https://static.wirtualnemedia.pl/media/top/Spotify_nowyekran655.png',
   },
 ];
-const Component = ({ className, children }) => (
+const Component = ({ className }) => (
   <div className={clsx(className, styles.root)}>
 
     <h3>My ads</h3>
@@ -46,13 +47,11 @@ const Component = ({ className, children }) => (
         </Card>
       ))}
     </CardGroup>
-
-    {children}
+    <Button href="/post/add" variant="dark">Add new post</Button>
   </div>
 );
 
 Component.propTypes = {
-  children: PropTypes.node,
   className: PropTypes.string,
 };
 
