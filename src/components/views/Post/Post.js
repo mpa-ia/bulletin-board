@@ -8,7 +8,7 @@ import clsx from 'clsx';
 
 import styles from './Post.module.scss';
 
-const Component = ({className, children}) => (
+const Component = ({ className, children }) => (
   <div className={clsx(className, styles.root)}>
     <h2>Post</h2>
     {children}
