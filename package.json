@@ -37,6 +37,7 @@
     ]
   },
   "dependencies": {
+    "@maripab/id-generator": "^1.0.1",
     "@material-ui/core": "^4.7.0",
     "@material-ui/icons": "^4.5.1",
     "axios": "^0.19.0",

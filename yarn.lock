@@ -1096,6 +1096,11 @@
     "@types/istanbul-reports" "^1.1.1"
     "@types/yargs" "^13.0.0"
 
+"@maripab/id-generator@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@maripab/id-generator/-/id-generator-1.0.1.tgz#f733f3d139bf71c54c23a794923cce055442c75d"
+  integrity sha512-tjBJLWZYXqBfR3JI/ME3aaYVpKoAw71JQIzCKh7/Pife1QL0w2BOo0W/cTGxdcG1iCbFfOUtpin9uZEKLS/NrA==
+
 "@material-ui/core@^4.7.0":
   version "4.7.0"
   resolved "https://registry.yarnpkg.com/@material-ui/core/-/core-4.7.0.tgz#84c02a6d1c99c7900e184538c5f9d87e30cf4c23"
