@@ -21,7 +21,7 @@ const Component = ({ className, post, user }) => (
         <Col lg={8}>
           <Form.Group controlId="postTitle">
             <Form.Label>Title</Form.Label>
-            <Form.Control defaultValue={post.title} required type="text" />
+            <Form.Control minLength="10" defaultValue={post.title} required type="text" />
             <Form.Text className="text-muted">
               Use catching keywords
             </Form.Text>
@@ -39,7 +39,7 @@ const Component = ({ className, post, user }) => (
       </Form.Row>
       <Form.Group controlId="postContent">
         <Form.Label>Describe the object or matter of your post</Form.Label>
-        <Form.Control defaultValue={post.content} required as="textarea" rows="3" />
+        <Form.Control minLength="20" defaultValue={post.content} required as="textarea" rows="3" />
         <Form.Text className="text-muted">
           Describe the object or matter of your post
         </Form.Text>

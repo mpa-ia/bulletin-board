@@ -20,7 +20,7 @@ const Component = ({ className }) => (
         <Col lg={8}>
           <Form.Group controlId="postTitle">
             <Form.Label>Title</Form.Label>
-            <Form.Control required type="text" placeholder="Enter title" />
+            <Form.Control minLength="10" required type="text" placeholder="Enter title" />
             <Form.Text className="text-muted">
               Use catching keywords
             </Form.Text>
@@ -38,7 +38,7 @@ const Component = ({ className }) => (
       </Form.Row>
       <Form.Group controlId="postContent">
         <Form.Label>Describe the object or matter of your post</Form.Label>
-        <Form.Control required as="textarea" rows="3" />
+        <Form.Control minLength="20" required as="textarea" rows="3" />
         <Form.Text className="text-muted">
           Describe the object or matter of your post
         </Form.Text>
