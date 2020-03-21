@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import randomID from '@maripab/id-generator';
 
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
@@ -7,8 +8,9 @@ import Col from 'react-bootstrap/Col';
 
 import clsx from 'clsx';
 
+
 import { connect } from 'react-redux';
-import { addPost } from '../../../redux/postsRedux.js';
+import { /* addPostRequest,  */addPost } from '../../../redux/postsRedux.js';
 
 import styles from './PostAdd.module.scss';
 
@@ -16,17 +18,15 @@ class Component extends React.Component {
 
   state = {
     postData: {
-      id: '',
       title: '',
       content: '',
       email: '',
       location: '',
-      published: '',
-      updated: '',
       phone: '',
       price: '',
       image: '',
     },
+    isError: false,
   }
 
   static propTypes = {
@@ -41,8 +41,24 @@ class Component extends React.Component {
     this.setState({ postData: { ...postData, [name]: value } });
   };
 
-  submitPost = e => {
+  submitPost = async (e) => {
+    const { postData } = this.state;
+    const { addPost } = this.props;
+
     e.preventDefault();
+
+    if (postData.title && postData.content && postData.email) {
+      const time = new Date();
+      const displayTime = `${time.getDate()}.${time.getMonth()}.${time.getFullYear()}, ${time.getHours()}:${time.getMinutes()}`;
+      const payload = {
+        ...postData,
+        id: randomID(10),
+        published: displayTime,
+        updated: displayTime,
+      };
+      await addPost(payload);
+    } else this.setState({ isError: true });
+
   };
 
   render() {
