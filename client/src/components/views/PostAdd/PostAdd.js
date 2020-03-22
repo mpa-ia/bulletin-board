@@ -60,12 +60,11 @@ class Component extends React.Component {
 
     if (postData.title && postData.content && postData.email) {
       const time = new Date();
-      const displayTime = `${time.getDate()}.${time.getMonth()}.${time.getFullYear()}, ${time.getHours()}:${time.getMinutes()}`;
       const payload = {
         ...postData,
         id: randomID(10),
-        published: displayTime,
-        updated: displayTime,
+        published: time,
+        updated: time,
         status: 'Published',
         user: {
           id: user.id,

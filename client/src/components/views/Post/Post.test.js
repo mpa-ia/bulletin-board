@@ -2,6 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { PostComponent } from './Post';
 
+const now = new Date();
 const mockProps = {
   post: {
     id: 1,
@@ -12,8 +13,8 @@ const mockProps = {
       id: 'jgg49j64hndfH75',
     },
     image: 'https://loremflickr.com/400/200/landscape,Turkey/all?lock=1',
-    published: 'today',
-    updated: 'today',
+    published: now,
+    updated: now,
     email: 'john.doe@example.com',
     phone: '5683573746',
     price: '50.00',
