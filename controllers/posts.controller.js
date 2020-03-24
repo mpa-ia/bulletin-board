@@ -2,8 +2,9 @@ const Post = require('../models/post.model');
 
 exports.loadAll = async (req, res) => {
   try {
-    const posts = await Post.find();
-    res.json(posts);
+    const posts = await Post.find({ status: 'Published' });
+    if (!posts) res.status(404).json({ post: 'Not Found' })
+    else res.json(posts);
   } catch (err) {
     res.status(500).json(err);
   }
