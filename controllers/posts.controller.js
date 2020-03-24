@@ -9,6 +9,16 @@ exports.loadAll = async (req, res) => {
   }
 };
 
+exports.loadByUser = async (req, res) => {
+  const { user } = req.query;
+  try {
+    const posts = await Post.find({ user: user });
+    res.json(posts);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+};
+
 exports.addPost = async (req, res) => {
   try {
     const { title, content, email } = req.body;
