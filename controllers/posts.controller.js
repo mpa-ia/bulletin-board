@@ -3,8 +3,19 @@ const Post = require('../models/post.model');
 exports.loadAll = async (req, res) => {
   try {
     const posts = await Post.find({ status: 'Published' });
-    if (!posts) res.status(404).json({ post: 'Not Found' })
+    if (!posts) res.status(404).json({ post: 'Not Found' });
     else res.json(posts);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+};
+
+exports.loadPostById = async (req, res) => {
+  try {
+    console.log(req.params);
+    const post = await Post.find({ _id: req.params.id });
+    if (!post) res.status(404).json({ post: 'Not Found' });
+    else res.json(post);
   } catch (err) {
     res.status(500).json(err);
   }
