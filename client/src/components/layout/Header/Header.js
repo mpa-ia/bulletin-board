@@ -9,9 +9,6 @@ import Nav from 'react-bootstrap/Nav';
 
 import clsx from 'clsx';
 
-// import { connect } from 'react-redux';
-// import { reduxSelector, reduxActionCreator } from '../../../redux/exampleRedux.js';
-
 import styles from './Header.module.scss';
 
 const Component = ({ className, user }) => (
@@ -21,7 +18,7 @@ const Component = ({ className, user }) => (
 
       {user.authenticated ? (
         <Nav className="mr-auto">
-          <Nav.Link href="/">My ads</Nav.Link>
+          <Nav.Link href={`/my-posts`}>My ads</Nav.Link>
           <Nav.Link href="/">Logout</Nav.Link>
         </Nav>
 
