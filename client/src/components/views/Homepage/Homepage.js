@@ -26,8 +26,7 @@ class Component extends React.Component {
   }
 
   componentDidMount() {
-    const { loadPosts } = this.props;
-    loadPosts();
+    this.props.loadPosts();
   }
 
   render() {
@@ -65,8 +64,8 @@ const mapStateToProps = state => ({
   posts: getAll(state),
 });
 
-const mapDispatchToProps = dispatch => ({
-  loadPosts: () => dispatch(loadPostsRequest()),
+const mapDispatchToProps = (dispatch, state) => ({
+  loadPosts: () => dispatch(loadPostsRequest(state)),
 });
 
 const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
