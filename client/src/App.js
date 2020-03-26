@@ -1,10 +1,12 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
-
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { createMuiTheme, StylesProvider, ThemeProvider } from '@material-ui/core/styles';
 import { CssBaseline } from '@material-ui/core';
-
+import { getUser } from './redux/userRedux.js';
+import { getAll, loadPostsRequest } from './redux/postsRedux.js';
 import { store } from './redux/store';
 
 import { MainLayout } from './components/layout/MainLayout/MainLayout';
@@ -20,25 +22,51 @@ const theme = createMuiTheme({
   },
 });
 
-const App = () => (
-  <Provider store={store}>
-    <BrowserRouter>
-      <StylesProvider injectFirst>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          <MainLayout>
-            <Switch>
-              <Route exact path='/' component={Homepage} />
-              <Route exact path='/post/add' component={PostAdd} />
-              <Route exact path='/post/:id' component={Post} />
-              <Route exact path='/post/:id/edit' component={PostEdit} />
-              <Route path='*' component={NotFound} />
-            </Switch>
-          </MainLayout>
-        </ThemeProvider>
-      </StylesProvider>
-    </BrowserRouter>
-  </Provider>
-);
+class App extends React.Component {
 
-export { App };
+  static propTypes = {
+    loadPosts: PropTypes.func,
+    posts: PropTypes.array,
+    user: PropTypes.object,
+  }
+
+  componentDidMount() {
+    this.props.loadPosts();
+  }
+
+  render() {
+    return (
+      <BrowserRouter>
+        <StylesProvider injectFirst>
+          <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <MainLayout>
+              <Switch>
+                <Route exact path='/' component={Homepage} />
+                <Route exact path='/post/add' component={PostAdd} />
+                <Route exact path='/post/:id' component={Post} />
+                <Route exact path='/post/:id/edit' component={PostEdit} />
+                <Route path='*' component={NotFound} />
+              </Switch>
+            </MainLayout>
+          </ThemeProvider>
+        </StylesProvider>
+      </BrowserRouter>
+    );
+  }
+}
+
+const mapStateToProps = state => ({
+  user: getUser(state),
+  posts: getAll(state),
+});
+
+const mapDispatchToProps = dispatch => ({
+  loadPosts: () => dispatch(loadPostsRequest()),
+});
+
+const Container = connect(mapStateToProps, mapDispatchToProps)(App);
+
+export {
+  Container as App,
+};
