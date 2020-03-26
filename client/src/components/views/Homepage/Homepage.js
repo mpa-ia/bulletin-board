@@ -5,7 +5,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-
+import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getUser } from '../../../redux/userRedux.js';
 import { getAll, loadPostsRequest } from '../../../redux/postsRedux.js';
@@ -20,11 +20,6 @@ class Component extends React.Component {
     className: PropTypes.string,
     user: PropTypes.object,
     posts: PropTypes.array,
-    loadPosts: PropTypes.func,
-  }
-
-  componentDidMount() {
-    this.props.loadPosts();
   }
 
   render() {
@@ -38,7 +33,7 @@ class Component extends React.Component {
         ) : ''}
         <Row>
           {posts.map(post => (
-            <Col xs={12} md={6} lg={4} key={post.id}>
+            <Col xs={12} md={6} lg={4} key={post._id}>
               <Card {...post} className={styles.ad}>
                 <Card.Img
                   className={styles.cardImage}
@@ -47,7 +42,7 @@ class Component extends React.Component {
                 />
                 <Card.Body>
                   <Card.Title>
-                    <a href={`/post/${post.id}`}>{post.title}</a>
+                    <NavLink exact to={`/post/${post._id}`}>{post.title}</NavLink>
                   </Card.Title>
                   <Card.Text>
                     {post.location}
@@ -72,11 +67,7 @@ const mapStateToProps = state => ({
   posts: getAll(state),
 });
 
-const mapDispatchToProps = (dispatch, state) => ({
-  loadPosts: () => dispatch(loadPostsRequest(state)),
-});
-
-const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
+const Container = connect(mapStateToProps, null)(Component);
 
 export {
   // Component as Homepage,
