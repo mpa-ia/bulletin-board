@@ -27,8 +27,8 @@ class Component extends React.Component {
     return (
       <div className={clsx(className, styles.root)}>
         {user.authenticated ? (
-          <Button href="/post/add" className="m-3" variant="dark">
-            Add new post
+          <Button className="m-3" variant="dark">
+            <NavLink exact to="/post/add" /* activeClassName={active} */>Add new post</NavLink>
           </Button>
         ) : ''}
         <Row>

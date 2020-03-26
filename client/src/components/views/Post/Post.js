@@ -9,15 +9,15 @@ import { getPostById } from '../../../redux/postsRedux.js';
 import { getUser } from '../../../redux/userRedux.js';
 import { IMAGES_URL } from '../../../config';
 import styles from './Post.module.scss';
+import { NavLink } from 'react-router-dom';
 
 const Component = ({ className, post, user }) => (
   <div className={clsx(className, styles.root)}>
     {user.id === post.user ? (
       <Button
         className="m-3"
-        href={`/post/${post._id}/edit`}
         variant="dark">
-        Edit post
+        <NavLink exact to={`/post/${post._id}/edit`} /* activeClassName={active} */>Edit post</NavLink>
       </Button>
     ) : ''}
     <Card>
