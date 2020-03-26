@@ -9,11 +9,9 @@ import Button from 'react-bootstrap/Button';
 import { connect } from 'react-redux';
 import { getUser } from '../../../redux/userRedux.js';
 import { getAll, loadPostsRequest } from '../../../redux/postsRedux.js';
-
 import { displayTime } from '../../../utils/displayTime';
-
 import clsx from 'clsx';
-
+import { IMAGES_URL } from '../../../config';
 import styles from './Homepage.module.scss';
 
 class Component extends React.Component {
@@ -39,21 +37,25 @@ class Component extends React.Component {
           </Button>
         ) : ''}
         <Row>
-          {posts.map(ad => (
-            <Col xs={12} md={6} lg={4} key={ad.id}>
-              <Card {...ad} className={styles.ad}>
-                <Card.Img className={styles.cardImage} variant="top" src={ad.image} />
+          {posts.map(post => (
+            <Col xs={12} md={6} lg={4} key={post.id}>
+              <Card {...post} className={styles.ad}>
+                <Card.Img
+                  className={styles.cardImage}
+                  variant="top"
+                  src={post.image ? `${IMAGES_URL}/${post.image}` : `${IMAGES_URL}/photo_null.jpg`}
+                />
                 <Card.Body>
                   <Card.Title>
-                    <a href={`/post/${ad.id}`}>{ad.title}</a>
+                    <a href={`/post/${post.id}`}>{post.title}</a>
                   </Card.Title>
                   <Card.Text>
-                    {ad.location}
+                    {post.location}
                   </Card.Text>
                 </Card.Body>
                 <Card.Footer>
                   <small className="text-muted">
-                    Published {displayTime(ad.published)}
+                    Published {displayTime(post.published)}
                   </small>
                 </Card.Footer>
               </Card>
