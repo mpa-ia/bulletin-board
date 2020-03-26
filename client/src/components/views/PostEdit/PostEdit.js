@@ -19,7 +19,7 @@ class Component extends React.Component {
 
   state = {
     postData: {
-      id: this.props.post.id,
+      id: this.props.post._id,
       title: this.props.post.title,
       content: this.props.post.content,
       email: this.props.post.email,
@@ -76,7 +76,7 @@ class Component extends React.Component {
     const { post, className, user } = this.props;
     const { postData } = this.state;
     return (
-      user.id === post.user.id ? (
+      user.id === post.user ? (
         <div className={clsx(className, styles.root)}>
           <h2>Edit post</h2>
           <Form onSubmit={submitPost}>
@@ -91,7 +91,7 @@ class Component extends React.Component {
                 </Form.Group>
               </Col>
               <Col md={6} lg={3}>
-                <Form.Group controlId="epostEmail">
+                <Form.Group controlId="postEmail">
                   <Form.Label>E-mail</Form.Label>
                   <Form.Control name="email" onChange={updateInputValue} value={postData.email} required type="email" placeholder="name@example.com" />
                   <Form.Text className="text-muted">

@@ -12,10 +12,10 @@ import styles from './Post.module.scss';
 
 const Component = ({ className, post, user }) => (
   <div className={clsx(className, styles.root)}>
-    {user.id === post.user.id ? (
+    {user.id === post.user ? (
       <Button
         className="m-3"
-        href={`/post/${post.id}/edit`}
+        href={`/post/${post._id}/edit`}
         variant="dark">
         Edit post
       </Button>
