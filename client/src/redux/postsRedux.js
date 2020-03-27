@@ -5,7 +5,7 @@ import { API_URL } from '../config';
 export const getAll = ({ posts }) => posts.data;
 
 export const getPostById = ({ posts }, postId) => {
-  const filteredPost = posts.data.filter(post => post.id === postId);
+  const filteredPost = posts.data.filter(post => post._id === postId);
   return filteredPost.length ? filteredPost[0] : { error: true };
 };
 
@@ -32,18 +32,18 @@ export const fetchError = payload => ({ payload, type: FETCH_ERROR });
 export const addPost = payload => ({ payload, type: ADD_POST });
 
 /* thunk creators */
-export const loadPostsRequest = ({ posts }) => {
-  if (!posts || !posts.data && !posts.loading.active) {
-    return async dispatch => {
-      dispatch(fetchStarted());
-      try {
-        let res = await axios.get(`${API_URL}/posts`);
-        dispatch(fetchSuccess(res.data));
-      } catch (e) {
-        dispatch(fetchError(e.message || true));
-      }
-    };
-  }
+export const loadPostsRequest = (/* { posts } */) => {
+  /* if (!posts || !posts.data && !posts.loading.active) { */
+  return async dispatch => {
+    dispatch(fetchStarted());
+    try {
+      let res = await axios.get(`${API_URL}/posts`);
+      dispatch(fetchSuccess(res.data));
+    } catch (e) {
+      dispatch(fetchError(e.message || true));
+    }
+  };
+  /* } */
 };
 
 export const addPostRequest = (data) => {

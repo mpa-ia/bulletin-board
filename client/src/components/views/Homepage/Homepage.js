@@ -5,15 +5,13 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-
+import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getUser } from '../../../redux/userRedux.js';
 import { getAll, loadPostsRequest } from '../../../redux/postsRedux.js';
-
 import { displayTime } from '../../../utils/displayTime';
-
 import clsx from 'clsx';
-
+import { IMAGES_URL } from '../../../config';
 import styles from './Homepage.module.scss';
 
 class Component extends React.Component {
@@ -22,11 +20,6 @@ class Component extends React.Component {
     className: PropTypes.string,
     user: PropTypes.object,
     posts: PropTypes.array,
-    loadPosts: PropTypes.func,
-  }
-
-  componentDidMount() {
-    this.props.loadPosts();
   }
 
   render() {
@@ -34,26 +27,30 @@ class Component extends React.Component {
     return (
       <div className={clsx(className, styles.root)}>
         {user.authenticated ? (
-          <Button href="/post/add" className="m-3" variant="dark">
-            Add new post
+          <Button className="m-3" variant="dark">
+            <NavLink exact to="/post/add" /* activeClassName={active} */>Add new post</NavLink>
           </Button>
         ) : ''}
         <Row>
-          {posts.map(ad => (
-            <Col xs={12} md={6} lg={4} key={ad.id}>
-              <Card {...ad} className={styles.ad}>
-                <Card.Img className={styles.cardImage} variant="top" src={ad.image} />
+          {posts.map(post => (
+            <Col xs={12} md={6} lg={4} key={post._id}>
+              <Card {...post} className={styles.ad}>
+                <Card.Img
+                  className={styles.cardImage}
+                  variant="top"
+                  src={post.image ? `${IMAGES_URL}/${post.image}` : `${IMAGES_URL}/photo_null.jpg`}
+                />
                 <Card.Body>
                   <Card.Title>
-                    <a href={`/post/${ad.id}`}>{ad.title}</a>
+                    <NavLink exact to={`/post/${post._id}`}>{post.title}</NavLink>
                   </Card.Title>
                   <Card.Text>
-                    {ad.location}
+                    {post.location}
                   </Card.Text>
                 </Card.Body>
                 <Card.Footer>
                   <small className="text-muted">
-                    Published {displayTime(ad.published)}
+                    Published {displayTime(post.published)}
                   </small>
                 </Card.Footer>
               </Card>
@@ -70,11 +67,7 @@ const mapStateToProps = state => ({
   posts: getAll(state),
 });
 
-const mapDispatchToProps = (dispatch, state) => ({
-  loadPosts: () => dispatch(loadPostsRequest(state)),
-});
-
-const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
+const Container = connect(mapStateToProps, null)(Component);
 
 export {
   // Component as Homepage,
