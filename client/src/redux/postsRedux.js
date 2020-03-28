@@ -9,10 +9,10 @@ export const getPostById = ({ posts }, postId) => {
   return filteredPost.length ? filteredPost[0] : { error: true };
 };
 
-/* export const getPostsByUser = ({ posts, user }) => {
-  const usersPost = posts.data.filter(post => post.id === user.id);
+export const getPostsByUser = ({ posts, user }) => {
+  const usersPost = posts.data.filter(post => post.user === user.id);
   return usersPost;
-}; */
+};
 
 /* action name creator */
 const reducerName = 'posts';
