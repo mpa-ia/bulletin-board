@@ -17,7 +17,6 @@ import { NotFound } from '../../views/NotFound/NotFound';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
-
 const Component = ({ className, post, user }) => (
   <div className={clsx(className, styles.root)}>
 
@@ -25,7 +24,7 @@ const Component = ({ className, post, user }) => (
       <Card>
         <CardMedia
           component="img"
-          image={post.image ? `${IMAGES_URL}/${post.image}` : `${IMAGES_URL}/photo_null.jpg`}
+          image={post.image ? `${IMAGES_URL}/${post.image}` : `${IMAGES_URL}/photo_null.jpeg`}
         />
         <CardContent className={styles.head}>
           <div>
@@ -59,6 +58,8 @@ const Component = ({ className, post, user }) => (
               <p>{post.email}</p>
               <small>Phone</small>
               <p>&nbsp;{post.phone}</p>
+              <small>Price</small>
+              <p>&nbsp;{post.price} zł</p>
             </Col>
           </Row>
         </CardContent>
