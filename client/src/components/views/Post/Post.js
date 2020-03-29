@@ -10,6 +10,7 @@ import { getUser } from '../../../redux/userRedux.js';
 import { IMAGES_URL } from '../../../config';
 import styles from './Post.module.scss';
 import { NavLink } from 'react-router-dom';
+import { NotFound } from '../../views/NotFound/NotFound';
 
 const Component = ({ className, post, user }) => (
   <div className={clsx(className, styles.root)}>
@@ -20,39 +21,45 @@ const Component = ({ className, post, user }) => (
         <NavLink exact to={`/post/${post._id}/edit`} /* activeClassName={active} */>Edit post</NavLink>
       </Button>
     ) : ''}
-    <Card>
-      <Card.Header>{post.title}</Card.Header>
-      <Card.Img
-        className={styles.postImage}
-        variant="top"
-        src={post.image ? `${IMAGES_URL}/${post.image}` : `${IMAGES_URL}/photo_null.jpg`}
-      />
-      <Card.Subtitle className="mt-2 text-muted">{post.price}</Card.Subtitle>
-      <Card.Subtitle className="mt-2">Status: {post.status}</Card.Subtitle>
-      <Card.Body>
-        <Card.Text>
-          {post.content}
-        </Card.Text>
-        <ul className={styles.postDetailsList}>
-          <li className={styles.postDetail}>
-            <small>Location</small>
-            <p>&nbsp;{post.location}</p>
-          </li>
-          <li className={styles.postDetail}>
-            <small>Phone</small>
-            <p>&nbsp;{post.phone}</p>
-          </li>
-          <li className={styles.postDetail}>
-            <small>E-mail</small>
-            <p>{post.email}</p>
-          </li>
-        </ul>
-      </Card.Body>
-      <Card.Footer>
-        <small className="text-muted">Last update {displayTime(post.updated)}</small>
-        <small className="text-muted">Published {displayTime(post.published)}</small>
-      </Card.Footer>
-    </Card>
+    {post._id ? (
+      <Card>
+        <Card.Header>{post.title}</Card.Header>
+        <Card.Img
+          className={styles.postImage}
+          variant="top"
+          src={post.image ? `${IMAGES_URL}/${post.image}` : `${IMAGES_URL}/photo_null.jpg`}
+        />
+        <Card.Subtitle className="mt-2 text-muted">{post.price}</Card.Subtitle>
+        <Card.Subtitle className="mt-2">Status: {post.status}</Card.Subtitle>
+        <Card.Body>
+          <Card.Text>
+            {post.content}
+          </Card.Text>
+          <ul className={styles.postDetailsList}>
+            <li className={styles.postDetail}>
+              <small>Location</small>
+              <p>&nbsp;{post.location}</p>
+            </li>
+            <li className={styles.postDetail}>
+              <small>Phone</small>
+              <p>&nbsp;{post.phone}</p>
+            </li>
+            <li className={styles.postDetail}>
+              <small>E-mail</small>
+              <p>{post.email}</p>
+            </li>
+          </ul>
+        </Card.Body>
+        <Card.Footer>
+          <small className="text-muted">Last update {displayTime(post.updated)}</small>
+          <small className="text-muted">Published {displayTime(post.published)}</small>
+        </Card.Footer>
+      </Card>
+    ) :
+      (
+        <NotFound />
+      )
+    }
   </div>
 );
 
