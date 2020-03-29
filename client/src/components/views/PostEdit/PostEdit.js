@@ -176,17 +176,23 @@ class Component extends React.Component {
                 </Form.Group>
               </Col>
             </Form.Row>
-            <input
-              name="image"
-              onChange={setImage}
-              type="file"
-            />
-            <Button
-              type="submit"
-              startIcon={<TrendingUpIcon />}
-            >
-              Update Post
-            </Button>
+            <Form.Row>
+              <Col md={6}>
+                <input
+                  name="image"
+                  onChange={setImage}
+                  type="file"
+                />
+              </Col>
+              <Col md={6}>
+                <Button
+                  type="submit"
+                  startIcon={<TrendingUpIcon />}
+                >
+                  Update Post
+                </Button>
+              </Col>
+            </Form.Row>
           </Form>
         </div>
       ) :
