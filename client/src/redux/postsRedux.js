@@ -129,16 +129,12 @@ export const reducer = (statePart = [], action = {}) => {
       };
     }
     case UPDATE_POST: {
+      console.log(action.payload);
       return {
         ...statePart,
-        data: [
-          statePart.data.map(
-            post => post._id === action.payload._id ? action.payload : post
-          )],
-        loading: {
-          active: false,
-          error: false,
-        },
+        data: statePart.data.map(post => {
+          return (post._id === action.payload._id ? { ...action.payload } : post);
+        }),
       };
     }
     default:
