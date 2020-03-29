@@ -10,6 +10,7 @@ import { getPostById, updatePostRequest } from '../../../redux/postsRedux.js';
 import { getUser } from '../../../redux/userRedux.js';
 import TrendingUpIcon from '@material-ui/icons/TrendingUp';
 import styles from './PostEdit.module.scss';
+import { withRouter } from 'react-router-dom';
 
 class Component extends React.Component {
 
@@ -33,6 +34,7 @@ class Component extends React.Component {
     post: PropTypes.object,
     user: PropTypes.object,
     updatePost: PropTypes.func,
+    history: PropTypes.object,
   }
 
   updateInputValue = ({ target }) => {
@@ -65,6 +67,7 @@ class Component extends React.Component {
       formData.append('updated', time);
 
       updatePost(postData.id, formData);
+      this.props.history.push(`/post/${postData.id}`);
     } else this.setState({ isError: true });
 
   };
@@ -199,7 +202,6 @@ class Component extends React.Component {
         (
           <NotFound />
         )
-
     );
   }
 }
@@ -213,7 +215,7 @@ const mapDispatchToProps = dispatch => ({
   updatePost: (id, data) => dispatch(updatePostRequest(id, data)),
 });
 
-const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
+const Container = connect(mapStateToProps, mapDispatchToProps)(withRouter(Component));
 
 export {
   // Component as PostEdit,

@@ -9,6 +9,7 @@ import { connect } from 'react-redux';
 import { addPostRequest } from '../../../redux/postsRedux.js';
 import { getUser } from '../../../redux/userRedux.js';
 import AddIcon from '@material-ui/icons/Add';
+import { withRouter } from 'react-router-dom';
 
 import styles from './PostAdd.module.scss';
 
@@ -31,7 +32,7 @@ class Component extends React.Component {
     className: PropTypes.string,
     addPost: PropTypes.func,
     user: PropTypes.object,
-
+    history: PropTypes.object,
   }
 
   updateInputValue = ({ target }) => {
@@ -69,6 +70,7 @@ class Component extends React.Component {
       formData.append('user', user.id);
 
       addPost(formData);
+      this.props.history.push('/my-posts');
     } else this.setState({ isError: true });
 
   };
@@ -76,7 +78,7 @@ class Component extends React.Component {
   render() {
     const { updateInputValue, submitPost, setImage } = this;
     const { postData } = this.state;
-    const { className, user } = this.props;
+    const { className, user, history } = this.props;
 
     return (
       user.authenticated ? (
@@ -219,7 +221,7 @@ const mapDispatchToProps = dispatch => ({
   addPost: post => dispatch(addPostRequest(post)),
 });
 
-const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
+const Container = connect(mapStateToProps, mapDispatchToProps)(withRouter(Component));
 
 export {
   // Component as PostAdd,
